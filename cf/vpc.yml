@@ -1,6 +1,4 @@
-Description:  This template deploys a VPC, with a public and private subnet. It also deploys an internet gateway, with a default
-route on the public subnet. It deploys a NAT gateway and default routes for them in the private subnets.
-
+Description:  This template deploys a VPC, with a public and private subnet. It also deploys an internet gateway, with a default route on the public subnet. It deploys a NAT gateway and default routes for them in the private subnets.
 Parameters:
   EnvironmentName:
     Description: An environment name that is prefixed to resource names

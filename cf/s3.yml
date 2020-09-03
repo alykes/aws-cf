@@ -6,7 +6,7 @@ Resources:
     Type: 'AWS::S3::Bucket'
     Description: Creation of s3 bucket
     Properties:
-      BucketName: alykes-mable-devops
+      BucketName: s3-alykes-mable
       VersioningConfiguration:
         Status: Enabled
       AccessControl: Private
