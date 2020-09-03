@@ -1,0 +1,20 @@
+ S3Bucket:
+    DeletionPolicy: Retain
+    Type: AWS::S3::Bucket
+    Description: Create an Amazon S3 bucket from in a cloudformation template
+    Properties:
+      BucketName: alykes-mable-devops
+      VersionConfiguration:
+        Status: Enabled
+      AccessControl: Private
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      
+    
+Outputs:
+  S3Bucket:
+    Description: Bucket creation.
+    Value: !Ref S3Bucket
