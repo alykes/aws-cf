@@ -1,5 +1,5 @@
-repo for mable devops test
---------------------------
+repo for testing EB solution
+----------------------------
 
 AWS Cloudformation stack consisting of the following components:
 
