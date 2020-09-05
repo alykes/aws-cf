@@ -2,39 +2,9 @@ AWSTemplateFormatVersion: 2010-09-09
 Description: >-
   Description: AWS CloudFormation Sample Template for creating an Amazon RDS DB instance: 
 Parameters:
-  DBInstanceID:
-    Default: mableRDS
-    Description: My database instance
-    Type: String
-    MinLength: '1'
-    MaxLength: '63'
-    AllowedPattern: '[a-zA-Z][a-zA-Z0-9]*'
-    ConstraintDescription: >-
-      Must begin with a letter and must not end with a hyphen or contain two
-      consecutive hyphens.
-  DBName:
-    Default: mableDB
-    Description: My database
-    Type: String
-    MinLength: '1'
-    MaxLength: '64'
-    AllowedPattern: '[a-zA-Z][a-zA-Z0-9]*'
-    ConstraintDescription: Must begin with a letter and contain only alphanumeric characters.
-  DBInstanceClass:
-    Default: db.t2.micro
-    Description: DB instance class
-    Type: String
-    ConstraintDescription: Must select a valid DB instance type.
-  DBAllocatedStorage:
-    Default: '20'
-    Description: The size of the database (GiB)
-    Type: Number
-    MinValue: '5'
-    MaxValue: '1024'
-    ConstraintDescription: must be between 20 and 65536 GiB.
   DBUsername:
     NoEcho: 'true'
-    Description: Username for MySQL database access
+    Description: Username for PostgreSQL database access
     Type: String
     MinLength: '1'
     MaxLength: '16'
@@ -42,7 +12,7 @@ Parameters:
     ConstraintDescription: must begin with a letter and contain only alphanumeric characters.
   DBPassword:
     NoEcho: 'true'
-    Description: Password MySQL database access
+    Description: Password PostgreSQL database access
     Type: String
     MinLength: '8'
     MaxLength: '41'
@@ -59,13 +29,17 @@ Resources:
         FromPort: '5432'
         ToPort: '5432'
         CidrIp: 115.70.212.0/24
+      - IpProtocol: tcp
+        FromPort: '5432'
+        ToPort: '5432'
+        CidrIp: 172.31.0.0/16
   mableDB:
     Type: 'AWS::RDS::DBInstance'
     Properties:
-      DBInstanceIdentifier: !Ref DBInstanceID
-      DBName: !Ref DBName
-      DBInstanceClass: !Ref DBInstanceClass
-      AllocatedStorage: !Ref DBAllocatedStorage
+      DBInstanceIdentifier: mableRDS
+      DBName: mableDB
+      DBInstanceClass: db.t2.micro
+      AllocatedStorage: 20
       Engine: postgres
       EngineVersion: 11.6
       MasterUsername: !Ref DBUsername
