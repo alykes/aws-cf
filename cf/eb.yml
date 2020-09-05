@@ -4,6 +4,7 @@ Resources:
     Properties:
       ApplicationName: mable Elastic Beanstalk Application
       Description: Cloudformation - mable test Application 
+  
   nodeApplicationVersion:
     Type: 'AWS::ElasticBeanstalk::ApplicationVersion'
     Properties:
@@ -12,6 +13,7 @@ Resources:
       SourceBundle:
         S3Bucket: s3-alykes-mable
         S3Key: ruby-sample.zip
+  
   nodeEnvironment:
     Type: 'AWS::ElasticBeanstalk::Environment'
     Properties:
@@ -23,10 +25,8 @@ Resources:
           Value: t1.micro
           OptionName: IamInstanceProfile
           Value: aws-elasticbeanstalk-ec2-role
-        - Namespace: 'aws:elasticbeanstalk:environment'
-          OptionName: ServiceRole
-          Value: mable-svc-eb-role
       VersionLabel: !Ref nodeApplicationVersion
+
 Outputs:
   nodeApplication:
     Description: Application Name
