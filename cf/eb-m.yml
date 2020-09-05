@@ -1,0 +1,58 @@
+Resources:
+  nodeApplication:
+    Type: 'AWS::ElasticBeanstalk::Application'
+    Properties:
+      ApplicationName: mable Elastic Beanstalk Application-m
+      Description: Cloudformation - mable test Application 
+  
+  nodeApplicationVersion:
+    Type: 'AWS::ElasticBeanstalk::ApplicationVersion'
+    Properties:
+      ApplicationName: !Ref nodeApplication
+      Description: Initial Version
+      SourceBundle:
+        S3Bucket: s3-alykes-mable
+        S3Key: ruby-sample.zip
+  
+  nodeEnvironment:
+    Type: 'AWS::ElasticBeanstalk::Environment'
+    Properties:
+      ApplicationName: !Ref nodeApplication
+      SolutionStackName: 64bit Amazon Linux 2 v3.1.1 running Ruby 2.7
+      OptionSettings:
+        - Namespace: 'aws:autoscaling:launchconfiguration'
+          OptionName: InstanceType
+          Value: t1.micro
+          OptionName: IamInstanceProfile
+          Value: aws-elasticbeanstalk-ec2-role
+        - Namespace: aws:ec2:vpc
+          OptionName: VPCId
+          Value: vpc-0b4b6c1d7d5b7558c
+          OptionName: Subnets
+          Value:
+            - subnet-0d6402bb875c3fe22
+            - subnet-013c0c6c35a850a1e
+          OptionName: ELBSubnets
+          Value:
+            - subnet-0762ffa25e98179ae
+            - subnet-07633d0680bfda2c2
+          OptionName: DBSubnets
+          Value:
+            - subnet-0d6402bb875c3fe22
+            - subnet-013c0c6c35a850a1e
+          OptionName: ELBScheme
+          Value: public
+      VersionLabel: !Ref nodeApplicationVersion
+
+Outputs:
+  nodeApplication:
+    Description: Application Name
+    Value: !Ref nodeApplication
+
+  nodeApplicationVersion:
+    Description: Application Version
+    Value: !Ref nodeApplicationVersion
+
+  nodeEnvironment:
+    Description: Environment
+    Value: !Ref nodeEnvironment
