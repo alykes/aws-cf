@@ -1,0 +1,1 @@
+aws cloudformation create-stack --stack-name tick-tack-s3 --template-url https://s3-tick-tack.s3-ap-southeast-2.amazonaws.com/s3.yml
