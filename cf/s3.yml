@@ -1,12 +1,12 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: CloudFormation template for s3 bucket 
+Description: CloudFormation template for s3 bucket
 Resources:
   S3Bucket:
     DeletionPolicy: Retain
     Type: 'AWS::S3::Bucket'
     Description: Creation of s3 bucket
     Properties:
-      BucketName: s3-alykes-mable
+      BucketName: s3-tick
       VersioningConfiguration:
         Status: Enabled
       AccessControl: Private

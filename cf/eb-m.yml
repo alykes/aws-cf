@@ -2,18 +2,18 @@ Resources:
   nodeApplication:
     Type: 'AWS::ElasticBeanstalk::Application'
     Properties:
-      ApplicationName: mable Elastic Beanstalk Application-m
-      Description: Cloudformation - mable test Application 
-  
+      ApplicationName: Tick-tack Elastic Beanstalk Application-m
+      Description: Cloudformation - Tick-Tack test Application
+
   nodeApplicationVersion:
     Type: 'AWS::ElasticBeanstalk::ApplicationVersion'
     Properties:
       ApplicationName: !Ref nodeApplication
       Description: Initial Version
       SourceBundle:
-        S3Bucket: s3-alykes-mable
-        S3Key: ruby-sample.zip
-  
+        S3Bucket: s3-tick-tack
+        S3Key: opserver-latest.zip
+
   nodeEnvironment:
     Type: 'AWS::ElasticBeanstalk::Environment'
     Properties:
