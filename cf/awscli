@@ -1,4 +1,8 @@
+#Build Everything with one template
+aws cloudformation create-stack --stack-name tt-full-flight-02 --template-url https://s3-tick-tack-templates.s3-ap-southeast-2.amazonaws.com/main.yml
+
 #Build the bucket to house the templates
 aws cloudformation create-stack --stack-name tick-tack-s3 --template-url https://s3-tick-tack.s3-ap-southeast-2.amazonaws.com/s3.yml
+
 #Build the VPC
 aws cloudformation create-stack --stack-name tick-tack-vpc --template-url https://s3-tick-tack.s3-ap-southeast-2.amazonaws.com/vpc.yml

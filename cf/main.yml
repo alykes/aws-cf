@@ -14,7 +14,18 @@ Resources:
         PrivateSubnet1CIDR: 192.168.200.0/24
         PrivateSubnet2CIDR: 192.168.210.0/24
       TimeoutInMinutes: 20
-  
+
+  EBNestedCall:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3-tick-tack-templates.s3-ap-southeast-2.amazonaws.com/eb.yml
+      Parameters:
+        EBVPCID: !GetAtt VPCNestedCall.Outputs.VPC
+        EC2Subs: !GetAtt VPCNestedCall.Outputs.PrivateSubnets
+        ELBSubs: !GetAtt VPCNestedCall.Outputs.PublicSubnets
+        ASGMinSize: 1
+        ASGMaxSize: 3
+      TimeoutInMinutes: 20
 Outputs:
   StackRef:
     Value: !Ref VPCNestedCall

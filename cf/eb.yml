@@ -1,6 +1,27 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: ElasticBeanstalk cloudformation template
 
+Parameters:
+  EBVPCID:
+    Description: A custom VPC ID for Elastic Beanstalk Deployment
+    Type: String
+
+  EC2Subs:
+    Description: The Elastic Beanstalk EC2 subnets (Private)
+    Type: String
+
+  ELBSubs:
+    Description: The Elastic Beanstalk ELB subnets (Public)
+    Type: String
+
+  ASGMinSize:
+    Description: Auto Scaling Group Minimum Size
+    Type: String
+
+  ASGMaxSize:
+    Description: Auto Scaling Group Maximum Size
+    Type: String
+
 Resources:
   nodeApplication:
     Type: AWS::ElasticBeanstalk::Application
@@ -26,20 +47,28 @@ Resources:
         - Namespace: aws:autoscaling:launchconfiguration
           OptionName: InstanceType
           Value: t3a.medium
+        - Namespace: aws:autoscaling:launchconfiguration
           OptionName: IamInstanceProfile
           Value: aws-elasticbeanstalk-ec2-role
         - Namespace: aws:ec2:vpc
           OptionName: VPCId
-          Value: vpc-091341cb11b26a3db
+          Value: !Ref EBVPCID
         - Namespace: aws:ec2:vpc
           OptionName: Subnets
-          Value: subnet-0d0ee2ea3ac34f9e0,subnet-045211e96ad8c3e2d
+          Value: !Ref EC2Subs
         - Namespace: aws:ec2:vpc
           OptionName: ELBSubnets
-          Value: subnet-03cb437e04121ed22,subnet-0a23a7cdea0690f22
+          Value: !Ref ELBSubs
         - Namespace: aws:ec2:vpc
           OptionName: ELBScheme
           Value: public
+        - Namespace: aws:autoscaling:asg
+          OptionName: MinSize
+          Value: !Ref ASGMinSize
+        - Namespace: aws:autoscaling:asg
+          OptionName: MaxSize
+          Value: !Ref ASGMaxSize
+
       VersionLabel: !Ref nodeApplicationVersion
 
 Outputs:
