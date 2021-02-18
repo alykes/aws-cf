@@ -1,45 +1,43 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: ElasticBeanstalk cloudformation template
+
 Resources:
   nodeApplication:
-    Type: 'AWS::ElasticBeanstalk::Application'
+    Type: AWS::ElasticBeanstalk::Application
     Properties:
-      ApplicationName: Tick-tack Elastic Beanstalk Application
+      ApplicationName: Tick-tack Elastic Beanstalk Application-1
       Description: Cloudformation - Tick-Tack test Application
 
   nodeApplicationVersion:
-    Type: 'AWS::ElasticBeanstalk::ApplicationVersion'
+    Type: AWS::ElasticBeanstalk::ApplicationVersion
     Properties:
       ApplicationName: !Ref nodeApplication
       Description: Initial Version
       SourceBundle:
         S3Bucket: s3-tick-tack-templates
-        S3Key: opserver-latest.zip
+        S3Key: netapp.zip
 
   nodeEnvironment:
-    Type: 'AWS::ElasticBeanstalk::Environment'
+    Type: AWS::ElasticBeanstalk::Environment
     Properties:
       ApplicationName: !Ref nodeApplication
       SolutionStackName: 64bit Windows Server 2019 v2.6.3 running IIS 10.0
       OptionSettings:
-        - Namespace: 'aws:autoscaling:launchconfiguration'
+        - Namespace: aws:autoscaling:launchconfiguration
           OptionName: InstanceType
-          Value: t1.micro
+          Value: t3a.medium
           OptionName: IamInstanceProfile
           Value: aws-elasticbeanstalk-ec2-role
         - Namespace: aws:ec2:vpc
           OptionName: VPCId
-          Value: vpc-0b4b6c1d7d5b7558c
+          Value: vpc-091341cb11b26a3db
+        - Namespace: aws:ec2:vpc
           OptionName: Subnets
-          Value:
-            - subnet-0d6402bb875c3fe22
-            - subnet-013c0c6c35a850a1e
+          Value: subnet-0d0ee2ea3ac34f9e0,subnet-045211e96ad8c3e2d
+        - Namespace: aws:ec2:vpc
           OptionName: ELBSubnets
-          Value:
-            - subnet-0762ffa25e98179ae
-            - subnet-07633d0680bfda2c2
-          OptionName: DBSubnets
-          Value:
-            - subnet-0d6402bb875c3fe22
-            - subnet-013c0c6c35a850a1e
+          Value: subnet-03cb437e04121ed22,subnet-0a23a7cdea0690f22
+        - Namespace: aws:ec2:vpc
           OptionName: ELBScheme
           Value: public
       VersionLabel: !Ref nodeApplicationVersion
