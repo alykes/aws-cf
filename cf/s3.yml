@@ -6,7 +6,7 @@ Resources:
     Type: 'AWS::S3::Bucket'
     Description: Creation of s3 bucket
     Properties:
-      BucketName: s3-tick-tack-s3-templates
+      BucketName: s3-tick-tack-templates
       VersioningConfiguration:
         Status: Enabled
       AccessControl: Private
@@ -20,6 +20,6 @@ Resources:
           - ServerSideEncryptionByDefault:
               SSEAlgorithm: AES256
 Outputs:
-  S3Bucket:
+  S3BucketName:
     Description: S3 Bucket
-    Value: !Ref S3Bucket
+    Value: !Ref 'S3Bucket'

@@ -2,7 +2,7 @@ Resources:
   nodeApplication:
     Type: 'AWS::ElasticBeanstalk::Application'
     Properties:
-      ApplicationName: Tick-tack Elastic Beanstalk Application-m
+      ApplicationName: Tick-tack Elastic Beanstalk Application
       Description: Cloudformation - Tick-Tack test Application
 
   nodeApplicationVersion:
@@ -11,14 +11,14 @@ Resources:
       ApplicationName: !Ref nodeApplication
       Description: Initial Version
       SourceBundle:
-        S3Bucket: s3-tick-tack
+        S3Bucket: s3-tick-tack-templates
         S3Key: opserver-latest.zip
 
   nodeEnvironment:
     Type: 'AWS::ElasticBeanstalk::Environment'
     Properties:
       ApplicationName: !Ref nodeApplication
-      SolutionStackName: 64bit Amazon Linux 2 v3.1.1 running Ruby 2.7
+      SolutionStackName: 64bit Windows Server 2019 v2.6.3 running IIS 10.0
       OptionSettings:
         - Namespace: 'aws:autoscaling:launchconfiguration'
           OptionName: InstanceType
@@ -54,5 +54,5 @@ Outputs:
     Value: !Ref nodeApplicationVersion
 
   nodeEnvironment:
-    Description: Environment
+    Description: Environment Name
     Value: !Ref nodeEnvironment
