@@ -23,7 +23,7 @@ Resources:
         EBVPCID: !GetAtt VPCNestedCall.Outputs.VPC
         EC2Subs: !GetAtt VPCNestedCall.Outputs.PrivateSubnets
         ELBSubs: !GetAtt VPCNestedCall.Outputs.PublicSubnets
-        ASGMinSize: 1
+        ASGMinSize: 2
         ASGMaxSize: 3
       TimeoutInMinutes: 20
 Outputs:
