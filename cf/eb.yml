@@ -35,7 +35,7 @@ Resources:
       ApplicationName: !Ref nodeApplication
       Description: Initial Version
       SourceBundle:
-        S3Bucket: s3-TT-templates
+        S3Bucket: s3-tt-templates
         S3Key: opserver.zip
 
   nodeEnvironment:

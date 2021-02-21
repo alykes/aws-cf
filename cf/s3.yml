@@ -6,7 +6,7 @@ Resources:
     Type: 'AWS::S3::Bucket'
     Description: Creation of s3 bucket
     Properties:
-      BucketName: s3-TT-templates
+      BucketName: s3-tt-templates
       VersioningConfiguration:
         Status: Enabled
       AccessControl: Private
