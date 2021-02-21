@@ -26,8 +26,8 @@ Resources:
   nodeApplication:
     Type: AWS::ElasticBeanstalk::Application
     Properties:
-      ApplicationName: Tick-tack Elastic Beanstalk Application-1
-      Description: Cloudformation - Tick-Tack test Application
+      ApplicationName: TT Elastic Beanstalk Application-1
+      Description: Cloudformation - TT test Application
 
   nodeApplicationVersion:
     Type: AWS::ElasticBeanstalk::ApplicationVersion
@@ -35,8 +35,8 @@ Resources:
       ApplicationName: !Ref nodeApplication
       Description: Initial Version
       SourceBundle:
-        S3Bucket: s3-tick-tack-templates
-        S3Key: netapp.zip
+        S3Bucket: s3-TT-templates
+        S3Key: opserver.zip
 
   nodeEnvironment:
     Type: AWS::ElasticBeanstalk::Environment
